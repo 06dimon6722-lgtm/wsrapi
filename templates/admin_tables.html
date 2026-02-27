@@ -1,0 +1,9 @@
+{% extends "admin_base.html" %}
+{% block content %}
+  <h2>База клиента: {{ client_id }}</h2>
+  <div class="stack">
+    {% for table in tables %}
+      <div><a href="/admin/{{ client_id }}/table/{{ table }}">{{ table }}</a></div>
+    {% endfor %}
+  </div>
+{% endblock %}

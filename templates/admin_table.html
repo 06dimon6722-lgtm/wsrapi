@@ -1,0 +1,39 @@
+{% extends "admin_base.html" %}
+{% block content %}
+  <h2>{{ table }} ({{ client_id }})</h2>
+  <table>
+    <tr>
+      {% for col in columns %}
+        <th>{{ col }}</th>
+      {% endfor %}
+      <th>Действия</th>
+    </tr>
+    {% for row in rows %}
+      <tr>
+        {% for col in columns %}
+          <td>
+            {% if col == "data" %}
+              <span class="muted">BLOB {{ row[col]|length if row[col] else 0 }} bytes</span>
+            {% elif col == "password_hash" %}
+              <span class="muted">скрыто</span>
+            {% else %}
+              {% if col == "created_at" and row[col] %}
+                {{ row[col]|replace("T", " ") }}
+              {% else %}
+                {{ row[col] }}
+              {% endif %}
+            {% endif %}
+          </td>
+        {% endfor %}
+        <td class="actions">
+          {% if table in ["users", "apartments", "bookings"] %}
+            <a href="/admin/{{ client_id }}/table/{{ table }}/edit/{{ row['id'] }}">Редактировать</a>
+          {% endif %}
+          {% if table == "apartment_media" %}
+            <a href="/admin/{{ client_id }}/photo/{{ row['id'] }}" target="_blank">Открыть фото</a>
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

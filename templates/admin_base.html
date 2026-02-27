@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ title or "Админка" }}</title>
+    <style>
+      :root {
+        --bg: #f6f7fb;
+        --card: #ffffff;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --line: #e5e7eb;
+        --brand: #2563eb;
+        --brand-dark: #1e40af;
+      }
+      * { box-sizing: border-box; }
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+      }
+      .wrap { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 18px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      }
+      h2 { margin: 0 0 16px; }
+      table { border-collapse: collapse; width: 100%; }
+      th, td { border-bottom: 1px solid var(--line); padding: 10px; text-align: left; }
+      th { background: #f9fafb; font-weight: 600; }
+      tr:hover td { background: #f9fbff; }
+      a { color: var(--brand); text-decoration: none; }
+      a:hover { color: var(--brand-dark); }
+      .muted { color: var(--muted); }
+      .actions { white-space: nowrap; }
+      .nav { margin-bottom: 16px; display: flex; gap: 12px; }
+      .nav a { font-weight: 600; }
+      .field { margin-bottom: 12px; }
+      label { display: block; margin-bottom: 6px; color: var(--muted); font-size: 14px; }
+      input[type="text"], input[type="password"], input[type="number"] {
+        width: 100%;
+        max-width: 420px;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        font-size: 14px;
+        background: #fff;
+      }
+      input:focus {
+        outline: none;
+        border-color: var(--brand);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+      }
+      button {
+        background: var(--brand);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 16px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      button:hover { background: var(--brand-dark); }
+      .stack { display: grid; gap: 10px; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="nav">
+        <a href="/admin">Участники</a>
+        <a href="/admin/logout">Выйти</a>
+      </div>
+      <div class="card">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+  </body>
+</html>

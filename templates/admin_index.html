@@ -1,0 +1,13 @@
+{% extends "admin_base.html" %}
+{% block content %}
+  <h2>Список участников</h2>
+  {% if clients %}
+    <div class="stack">
+      {% for client in clients %}
+        <div><a href="/admin/{{ client }}">{{ client }}</a></div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="muted">Пока нет баз. Сделайте любой запрос с ClientId.</p>
+  {% endif %}
+{% endblock %}

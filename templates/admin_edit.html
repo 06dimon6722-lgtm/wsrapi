@@ -1,0 +1,17 @@
+{% extends "admin_base.html" %}
+{% block content %}
+  <h2>Редактирование {{ table }} #{{ row_id }}</h2>
+  <form method="post">
+    {% for field in editable %}
+      <div class="field">
+        <label>{{ field }}</label>
+        <input
+          type="{% if field in ['price', 'guests', 'is_published'] %}number{% else %}text{% endif %}"
+          name="{{ field }}"
+          value="{{ row[field] }}"
+        />
+      </div>
+    {% endfor %}
+    <button type="submit">Сохранить</button>
+  </form>
+{% endblock %}
