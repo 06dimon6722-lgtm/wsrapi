@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 
 import os
 
@@ -24,12 +25,22 @@ tags_metadata = [
 ]
 
 
+
 app = FastAPI(
     title="Сервис аренды квартир",
     description=description,
     version="1.0.0",
     openapi_tags=tags_metadata,
 )
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.mount("/uploads", StaticFiles(directory=os.path.join(DATA_DIR, "uploads"), check_dir=False), name="uploads")
 
 
